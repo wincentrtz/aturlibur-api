@@ -13,14 +13,15 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 Route::post('/register', 'API\AuthController@register');
 Route::post('/login', 'API\AuthController@login');
 
-Route::group(['prefix' => 'auth', 'middleware' => 'jwt.auth'], function () {
+Route::group(['middleware' => 'jwt.auth'], function () {
+    
     Route::get('user', 'API\AuthController@user');
     Route::post('logout', 'API\AuthController@logout');
+
+    Route::get('trip','API\TripController@index');
+    Route::post('trip','API\TripController@store');
+    Route::get('trip/{name}','API\TripController@show');
 });

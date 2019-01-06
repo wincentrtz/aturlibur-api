@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\User;
 use JWTAuth;
+use Auth;
 
 class AuthController extends Controller
 {
@@ -81,8 +82,8 @@ class AuthController extends Controller
     public function user(Request $request)
     {
         $user = User::find(Auth::user()->id);
-        return json()->response([
-            'status' => 'success',
+        return response()->json([
+            'status' => 200,
             'data' => $user
         ]);
     }
