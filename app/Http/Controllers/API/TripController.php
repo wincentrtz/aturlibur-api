@@ -55,9 +55,6 @@ class TripController extends Controller
     public function show($name)
     {
         $trip = Trip::where('trip_name',$name)->first();
-       
-        $trip['trip_start_date'] = date("d-m-Y", strtotime($trip['trip_start_date']));
-        $trip['trip_end_date'] = date("d-m-Y", strtotime($trip['trip_end_date']));
         $trip['range'] =( strtotime($trip['trip_end_date']) - strtotime($trip['trip_start_date'])) / (60 * 60 * 24);
         return response()->json([
             'status' => 200,
