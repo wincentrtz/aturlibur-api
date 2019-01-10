@@ -38,7 +38,6 @@ class TripController extends Controller
         $trip->trip_end_date = $request->trip_end_date;
         $trip->trip_location = $request->trip_location;
         $trip->save();
-        
         return response()->json([
             'status' => 201,
             'data' => $trip
@@ -60,6 +59,12 @@ class TripController extends Controller
             'status' => 200,
             'data' => $trip
         ]);
+    }
+
+    public function showDetail($date)
+    {
+        $tripDetails = TripDetail::where('date',$date)->get();
+        dd($tripDetails);
     }
 
     /**
